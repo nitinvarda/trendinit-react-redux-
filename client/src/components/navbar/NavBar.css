@@ -1,0 +1,43 @@
+.title{
+    display: inline;
+    font-family: 'Alfa Slab One', cursive;
+    padding-top: 5px;
+    padding-left: 2px;
+    text-decoration: none;
+
+    /* background-color: grey; */
+}
+
+#trend{
+    margin-left: -10px;
+    color: #F00;
+    text-decoration: none;
+}
+
+#init{
+    color: #FFF;
+    text-decoration: none;
+}
+/* .nav{
+    background-color: white;
+    color: black;
+} */
+.nav:hover , .nav-links h5:hover{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+.nav-links h5{
+    color: white;
+    font-size: medium;
+}
+/* h5:hover{
+    color: #F00;
+} */
+
+
+.title-img{
+    width: 50px;
+    height: 40px;
+    padding-left: 5px;
+}

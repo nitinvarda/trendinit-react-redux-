@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cagliostro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+.main{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+}
+
+.App {
+  flex:1;
+  margin-top: 56px;
+}
+
+

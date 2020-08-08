@@ -1,0 +1,48 @@
+.admin-home-start{
+    margin-top: 20px;
+}
+
+.admin-start{
+    padding-top: 20px;
+}
+
+.welcome-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.adminhome-article-img{
+    width: 280px;
+    height: 200px;
+}
+.del{
+    margin-left: 20px;
+}
+
+.admin-home-desc{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 600px){
+
+    .adminhome-article-img{
+        width: 100%;
+        height: 300px;
+    }
+
+    .adminhome-article{
+        margin-left: 20px;
+        margin-right: 20px;
+    
+    }
+    .admin-home-desc{
+        
+        -webkit-line-clamp: 4;
+        
+    }
+}
