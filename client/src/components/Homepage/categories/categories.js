@@ -11,7 +11,7 @@ const Categories = (props) => {
     useEffect(() => {
         axios.get("/cat/" + type)
             .then(res => {
-                console.log(res.data);
+
                 setItems(res.data)
             })
     }, [type])
@@ -30,9 +30,9 @@ const Categories = (props) => {
             <div className="container" style={{ marginTop: 30 }}>
                 <h5 style={{ textAlign: "center" }}>Category : {type}</h5>
                 <hr />
-                {items.map(item => {
+                {items.map((item, i) => {
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={i}>
                             <div className="row ps">
 
                                 <div className="col-md-4">

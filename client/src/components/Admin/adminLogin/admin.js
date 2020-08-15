@@ -32,38 +32,29 @@ const Admin = ({ Login, isAuthenticated }) => {
     else {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-sm-3">
-
-                    </div>
-                    <div className=" loginpage col-sm-6">
-                        <h3 style={{ textAlign: "center", marginTop: "10px" }}>Admin Login<hr /></h3>
-                        {/* {alerts.map(alert => (
-                        <div >
-                            {alert.msg}
-                        </div>
-                    ))} */}
-                        <form onSubmit={submitForm} className="loginform">
-                            <input type="text" name="username" value={username} className="username" onChange={onChange} placeholder="username" required />
-                            <input type="password" name="password" value={password} className="password" onChange={onChange} placeholder="password" required />
 
 
-                            <input type="Submit" style={{ backgroundColor: "#FF0000" }} value="Login" />
+                <div className=" loginpage ">
+                    <h3 style={{ textAlign: "center", marginTop: "10px" }}>Admin Login<hr /></h3>
+                    <form onSubmit={submitForm} className="loginform">
+                        <input type="text" name="username" value={username} className="username" onChange={onChange} placeholder="username" required />
+                        <input type="password" name="password" value={password} className="password" onChange={onChange} placeholder="password" required />
 
 
-                        </form>
+                        <input type="Submit" style={{ backgroundColor: "#FF0000" }} defaultValue="Login" />
 
-                    </div>
-                    <div className="col-sm-3">
 
-                    </div>
+                    </form>
 
                 </div>
 
 
-
-
             </div>
+
+
+
+
+
         );
     }
 }

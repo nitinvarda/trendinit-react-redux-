@@ -23,7 +23,7 @@ const AdminHome = ({ isAuthenticated, delData, deleteStatus }) => {
     useEffect(() => {
         axios.get("/adminhome")
             .then(res => {
-                console.log(res);
+
                 setItems(res.data);
             })
             .catch(err => {
@@ -57,8 +57,8 @@ const AdminHome = ({ isAuthenticated, delData, deleteStatus }) => {
                     </div>
                     <hr />
                     <div className="row">
-                        {items.map(item => (
-                            <React.Fragment>
+                        {items.map((item, i) => (
+                            <React.Fragment key={i}>
                                 <div className="col-xl-3">
                                     <img src={"/image/" + item.imagename} className="adminhome-article-img" alt="post img" />
                                 </div>
@@ -68,7 +68,7 @@ const AdminHome = ({ isAuthenticated, delData, deleteStatus }) => {
                                     <br />
                                     <h4 className="admin-home-desc"><ReactMarkdown source={item.desc} escapeHtml={false} /></h4>
                                     <br />
-                                    <buttton type="button" className="btn btn-secondary"><Link to={{ pathname: "/edit/" + item._id }} style={{ color: "white" }}>Edit</Link></buttton>
+                                    <button type="button" className="btn btn-secondary"><Link to={{ pathname: "/edit/" + item._id }} style={{ color: "white" }}>Edit</Link></button>
                                     <button onClick={delPost} id={item._id} type="button" className="btn btn-danger del">Delete</button>
                                     <hr />
                                 </div>

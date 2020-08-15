@@ -91,7 +91,7 @@ const Add = ({ postData, postStatus }) => {
                     </div>
 
 
-                    <input type="submit" className="postbtn" value="POST" />
+                    <input type="submit" className="postbtn" defaultValue="POST" />
                 </form>
 
 

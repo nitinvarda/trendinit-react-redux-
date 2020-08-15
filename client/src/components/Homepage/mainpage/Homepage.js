@@ -14,51 +14,27 @@ const Homepage = () => {
 
     }, [])
 
-    var posts = [];
-    var oldposts = [];
-
-    // items is json object which contain data of articles 
-    var slice = items.slice(0, 3);
-    // creating a for loop to add the latest three posts 
-    for (let i = 0; i < slice.length; i++) {
-        posts.push(
-
-            <div className="first " style={{ backgroundImage: `url(${"/image/" + items[i].imagename})` }}>
-                <div className="text">
-                    <h4> <Link to={"/post/" + items[i]._id} style={{ color: 'white', textDecoration: 'none' }} >{items[i].title}</Link> </h4>
-
-                </div>
-                <div className="overlay"></div>
-            </div>);
-    }
-
-
-    // creating a for loop to add the recent  posts other than top 3 
-    for (var i = 3; i < items.length; i++) {
-
-        oldposts.push(
-            <div className="old-article-start">
-                <img src={"/image/" + items[i].imagename} className="img" alt="article img" />
-                <div className="article-details">
-                    <h3  ><Link to={"/post/" + items[i]._id} >{items[i].title}</Link></h3>
-                    <p className="article-desc"><ReactMarkdown source={items[i].desc} escapeHtml={false} /></p>
-                    <h6>By:<Link to={"/by/" + items[i].by}>{items[i].by}</Link>--Date:{items[i].date}</h6>
-
-                </div>
-
-                <br />
-            </div>
-
-        )
-    }
-
-
+    // this is for the top three latest posts
+    const posts = items.slice(0, 3);
+    // this is for all other posts
+    const oldposts = items.slice(3);
 
     return (
         <React.Fragment>
             <div className="main-content" >
                 <div className="actual">
-                    {posts}  {/* this is the above created top three posts */}
+                    {posts.map((item, i) => {
+                        return (
+                            <div className="first " style={{ backgroundImage: `url(${"/image/" + item.imagename})` }} key={i}>
+                                <div className="text">
+                                    <h4> <Link to={"/post/" + item._id} style={{ color: 'white', textDecoration: 'none' }} >{item.title}</Link> </h4>
+
+                                </div>
+                                <div className="overlay"></div>
+                            </div>)
+
+                    })}
+                    {/* this is the above created top three posts */}
                 </div>
                 <hr />
                 <h3 style={{ textAlign: 'center' }}>Recent Stories</h3>
@@ -81,7 +57,23 @@ const Homepage = () => {
                             </div>
                         </div>
                         <div className="col-sm-9">
-                            {oldposts} {/* this is all recent posts */}
+                            {oldposts.map((item, i) => {
+                                return (
+                                    <div className="old-article-start" key={i}>
+                                        <img src={"/image/" + item.imagename} className="img" alt="article img" />
+                                        <div className="article-details">
+                                            <h3  ><Link to={"/post/" + item._id} >{item.title}</Link></h3>
+                                            <p className="article-desc"><ReactMarkdown source={item.desc} escapeHtml={false} /></p>
+                                            <h6>By:<Link to={"/by/" + item.by}>{item.by}</Link>--Date:{item.date}</h6>
+
+                                        </div>
+
+                                        <br />
+                                    </div>
+
+                                )
+                            })}
+
                         </div>
                     </div>
                 </div>

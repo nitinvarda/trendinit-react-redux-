@@ -4,7 +4,7 @@ const article = require('./articleSchema');
 
 
 router.get("/:name", (req, res) => {
-    article.find({ by: req.params.name }, (err, data) => {
+    article.find({ by: req.params.name }).sort({ _id: -1 }).exec((err, data) => {
         if (err) res.status(404).json({ error: err });
         if (data) {
             res.json(data);
