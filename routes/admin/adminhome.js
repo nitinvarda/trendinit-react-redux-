@@ -5,7 +5,7 @@ var auth = require('../auth');
 
 
 router.get("/", function (req, res, next) {
-
+    // this is admin home article only authenticated user can see this page and data for manipulatin stuff
     return article
         .find({})
         .limit(10)

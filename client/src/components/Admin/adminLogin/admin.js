@@ -13,20 +13,23 @@ const Admin = ({ Login, isAuthenticated }) => {
         password: ''
     })
 
+    // handling form elements
     const onChange = (e) => {
         setDetails({
             ...details, [e.target.name]: e.target.value
         })
     }
+    // submit function
     const submitForm = (e) => {
         e.preventDefault();
         Login(username, password);
 
     }
     const { username, password } = details;
-    // redirect if logged in
-    if (isAuthenticated) {
 
+
+    if (isAuthenticated) {
+        // if user is authenticated redirect to admin-home
         return <Redirect to="/admin-home" />
     }
     else {
@@ -59,15 +62,19 @@ const Admin = ({ Login, isAuthenticated }) => {
     }
 }
 
+// default proptypes for this component
 Admin.propTypes = {
     isAuthenticated: PropTypes.bool
 }
 
+// bringing state to props 
 const mapStateToProps = state => ({
 
     isAuthenticated: state.login.isAuthenticated
 
 })
+
+// bringing dispatch to props
 const mapDispatchToProps = (dispatch) => {
     return {
         Login: (username, password) => dispatch(login(username, password))

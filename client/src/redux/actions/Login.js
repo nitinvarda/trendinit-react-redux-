@@ -5,7 +5,7 @@ import { setAlert } from '../actions/alert';
 import setAuthToken from '../../setAuthToken';
 
 
-// load user
+// as soon as app renders it checks for token , if present it will set authentication
 export const loadUser = () => async dispatch => {
     if (localStorage.token) {
         setAuthToken(localStorage.token);
@@ -26,7 +26,7 @@ export const loadUser = () => async dispatch => {
     }
 }
 
-// Login user
+// Login action
 export const login = (username, password) => async dispatch => {
     const config = {
         headers: {
@@ -34,7 +34,6 @@ export const login = (username, password) => async dispatch => {
         }
 
     }
-
     const body = {
         username,
         password
@@ -46,6 +45,7 @@ export const login = (username, password) => async dispatch => {
             type: LOGIN_SUCCESS,
             payload: res.data
         })
+        // as soon as login is successfull then we are dispatching loaduser , it will set authentication of user
         dispatch(loadUser())
     }
     catch (err) {

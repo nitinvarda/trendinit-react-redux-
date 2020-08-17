@@ -27,6 +27,7 @@ if (localStorage.token) {
 
 
 function App() {
+  // we are checking for authentication as soon this component is rendered
   useEffect(() => {
     store.dispatch(loadUser());
   }, [])

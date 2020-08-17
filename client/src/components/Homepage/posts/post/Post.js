@@ -5,13 +5,14 @@ import axios from 'axios';
 import './Post.css';
 
 
-
+// this is functional component with react-hooks
 const Post = (props) => {
     const [item, setItem] = useState([]);
 
-
+    // bringing post id from home to fetch data of that post from db
+    // storing id in id variable
     const id = props.match.params.id
-
+    // useEffect is similar to componentDidMount() in class component , it fetces the data as soon as component is rendered
     useEffect(() => {
         axios.get("/article/" + id)
             .then(res => {
@@ -69,35 +70,3 @@ export default Post;
 
 
 
-// class Post extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             id: this.props.match.params.id,
-//             data: []
-//         }
-//     }
-//     componentDidMount() {
-//         axios.get("/article/" + this.state.id)
-//             .then(res => {
-
-//                 this.setState({
-//                     data: res.data[0]
-//                 })
-
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//             })
-//     }
-//     render() {
-//         const markdown = this.state.data.desc;
-//         return (
-
-
-
-//         );
-//     }
-// }
-
-// export default Post;

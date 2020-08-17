@@ -8,7 +8,7 @@ import { updateData } from '../../../../redux/actions/PostData';
 
 
 
-
+// this is functional component with react-hooks
 const Edit = (props) => {
     const [post, setPost] = useState({
         title: " ",
@@ -21,8 +21,11 @@ const Edit = (props) => {
     })
     const { title, by, desc, category, date, myImage } = post;
 
+    // bringing post id from adminhome to fetch data of that post from db
+    // storing id in id variable
     const id = props.match.params.id;
 
+    // useEffect is similar to componentDidMount() in class component , it fetces the data as soon as component is rendered
     useEffect(() => {
         axios.get("/edit/" + id).then(res => {
             console.log(res.data);
@@ -33,6 +36,7 @@ const Edit = (props) => {
 
 
     const marked_desc = marked(desc);
+    // submit after editing the post
     const Submit = (e) => {
         e.preventDefault();
         props.updateData({
@@ -40,17 +44,21 @@ const Edit = (props) => {
         })
 
     }
+    // handling form elements
     const onChange = (e) => {
         setPost({
             ...post, [e.target.name]: e.target.value
         })
     }
+    // handling the img file
     const fileHandler = (e) => {
         setPost({
             ...post, myImage: e.target.files[0]
         })
     }
+    // if updated successully
     if (props.updateStatus === 'success') {
+        // it redirects to admin-home
         return (<Redirect to="/admin-home" />)
     }
     else {
@@ -113,6 +121,7 @@ const Edit = (props) => {
 
     }
 }
+// bringing state to props 
 const mapStateToProps = (state) => ({
     updateStatus: state.postdata.updateStatus
 })

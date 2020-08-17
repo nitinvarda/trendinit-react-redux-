@@ -4,10 +4,15 @@ import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import './categories.css';
 
+
+// this is functional component with react-hooks
 const Categories = (props) => {
     const [items, setItems] = useState([]);
 
-    const type = props.match.params.type
+    // here we are bringing category type as props to this component from admin-home component
+    // which we use to fetch the relavent category data from db
+    const type = props.match.params.type;
+    // useEffect is similar to componentDidMount() in class component , it fetces the data as soon as component is rendered
     useEffect(() => {
         axios.get("/cat/" + type)
             .then(res => {
@@ -16,7 +21,9 @@ const Categories = (props) => {
             })
     }, [type])
 
-
+    // if the category type doesn't have any data then it response with empty array
+    // if there are no items 
+    // then this is rendered
     if (items.length === 0) {
         return (
             <div className="container" style={{ textAlign: "center", marginTop: 50 }}>

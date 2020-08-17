@@ -6,6 +6,7 @@ const initialState = {
     deleteStatus: null
 }
 
+// this reducer will recieve response after adding or editing or deleting post
 export default function (state = initialState, action) {
     const { type, payload } = action
     switch (type) {

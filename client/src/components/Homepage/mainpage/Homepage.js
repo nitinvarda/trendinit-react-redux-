@@ -4,9 +4,11 @@ import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import './Homepage.css';
 
+// this is functional component with react hooks
 const Homepage = () => {
     const [items, setItems] = useState([]);
 
+    // useEffect is similar to componentDidMount() in class component , it fetces the data as soon as component is rendered
     useEffect(() => {
         axios.get("/home").then(res => {
             setItems(res.data);
@@ -34,7 +36,7 @@ const Homepage = () => {
                             </div>)
 
                     })}
-                    {/* this is the above created top three posts */}
+
                 </div>
                 <hr />
                 <h3 style={{ textAlign: 'center' }}>Recent Stories</h3>

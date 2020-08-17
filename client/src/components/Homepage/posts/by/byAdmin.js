@@ -9,11 +9,14 @@ import './byAdmin.css';
 
 
 
+// this is functional component with react-hooks
 const ByAdmin = (props) => {
     const [item, setItem] = useState([]);
 
-
-    const name = props.match.params.name
+    // bringing name of the author from home to fetch data of that post from db
+    // storing name in name variable
+    const name = props.match.params.name;
+    // useEffect is similar to componentDidMount() in class component , it fetces the data as soon as component is rendered
     useEffect(() => {
         axios.get("/by/" + name)
             .then(res => {
@@ -59,51 +62,3 @@ const ByAdmin = (props) => {
 
 
 export default ByAdmin;
-// class Bynitin extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             name: this.props.match.params.name,
-//             data: []
-
-//         }
-
-//     }
-
-//     componentDidMount() {
-//         axios.get('/' + this.state.name)
-//             .then(res => {
-
-//                 this.setState({
-//                     data: res.data
-//                 })
-//             })
-//     }
-//     render() {
-//         var { data } = this.state
-//         var posts = []
-//         for (let i = 0; i < data.length; i++) {
-//             posts.push(
-
-
-
-
-
-//             )
-//         }
-//         return (
-//             <div>
-//                 <h3 style={{ textAlign: "center" }}>Articles by {this.state.name}</h3>
-//                 <div className="container">
-
-//                     {posts}
-
-//                 </div>
-
-
-//             </div>
-//         );
-//     }
-// }
-
-

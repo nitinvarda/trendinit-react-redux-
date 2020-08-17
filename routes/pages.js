@@ -6,7 +6,7 @@ var article = require('./articleSchema');
 
 
 router.get("/home", function (req, res, next) {
-
+    // this is home page article data which contains all posts data
     return article
         .find({})
         .limit(10)
@@ -20,6 +20,8 @@ router.get("/home", function (req, res, next) {
 })
 
 router.get("/cat/:type", (req, res) => {
+    // this is for specific category data
+    // only that category posts data is sent
     return article
         .find({ category: req.params.type })
         .limit(10)

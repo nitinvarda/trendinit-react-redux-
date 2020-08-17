@@ -10,7 +10,11 @@ import { connect } from 'react-redux';
 const AdminPost = (props) => {
     const [item, setItem] = useState([]);
 
+    // we are getting into post details and this comonent recieves id as props from admin-home
+    // which we use for fetching the relavent post from db
+    // the recieved id as props is saved to id variable
     const id = props.match.params.id
+    // useEffect is similar to componentDidMount() in class component , it fetces the data as soon as component is rendered
     useEffect(() => {
         axios.get("/article/" + id)
             .then(res => {
@@ -21,11 +25,13 @@ const AdminPost = (props) => {
     }, [id])
     const { title, date, by, desc, imagename } = item;
 
-
+    // for deleting the post 
     const delPost = (e) => {
         props.delData(e.target.id)
     }
+    // if deleted successfully
     if (props.deleteStatus === "deleted") {
+        // it redirects to admin-home
         return (<Redirect to="/admin-home" />)
     }
     else {
@@ -67,6 +73,7 @@ const AdminPost = (props) => {
     }
 }
 
+// bringing state to props in this component
 const mapStateToProps = (state) => ({
     deleteStatus: state.postdata.deleteStatus
 })

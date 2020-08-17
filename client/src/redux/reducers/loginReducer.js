@@ -7,11 +7,14 @@ const initialState = {
     user: null
 }
 
+// this is login reducer 
 export default function (state = initialState, action) {
     const { type, payload } = action
     switch (type) {
 
         case LOGIN_SUCCESS:
+            // if login is success we are storing the jwt token in localstorage
+            // which we check for authentication in load user action
             localStorage.setItem('token', payload.token)
             return {
                 ...state,
@@ -21,7 +24,7 @@ export default function (state = initialState, action) {
 
             }
         case USER_LOADED:
-
+            // if user is loaded the authentication is set to true and the user field consist of user details
             return {
                 ...state,
                 isAuthenticated: true,
@@ -30,6 +33,7 @@ export default function (state = initialState, action) {
             }
         case LOGIN_FAIL:
         case AUTH_ERROR:
+            // if there is any error in logging in we remove the token from localstorage
             localStorage.removeItem('token');
             return {
                 ...state,

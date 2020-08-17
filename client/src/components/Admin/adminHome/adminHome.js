@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { delData } from '../../../redux/actions/PostData';
-
 import { connect } from 'react-redux';
-
-
-
-
-
 import {
     Link,
     Redirect
@@ -16,10 +10,11 @@ import ReactMarkdown from 'react-markdown';
 import './adminhome.css';
 
 
-
+// this is functional component with react hooks
 const AdminHome = ({ isAuthenticated, delData, deleteStatus }) => {
     const [items, setItems] = useState([]);
 
+    // using useEffect to bring posts from db as soon this component renders
     useEffect(() => {
         axios.get("/adminhome")
             .then(res => {
@@ -34,15 +29,18 @@ const AdminHome = ({ isAuthenticated, delData, deleteStatus }) => {
 
     }, [])
 
-
+    // delete post button function
     const delPost = (e) => {
         delData(e.target.id)
     }
-
+    // checking user authentication
     if (isAuthenticated) {
+        // if any post is deleted it get result as deleted 
+        // then page is reloaded to see the changes
         if (deleteStatus === "deleted") {
             return window.location.reload();
         }
+        // as soon as user is authenticated below code shows up
         else {
             return (
                 <div className="container admin-home-start">
@@ -83,11 +81,13 @@ const AdminHome = ({ isAuthenticated, delData, deleteStatus }) => {
     }
 
     else {
+        // if user is not authenticated it redirects to admin login page
         return <Redirect to="/admin" />
     }
 
 }
 
+// bringing state to props through react-redux connect
 const mapStateToProps = (state) => ({
     isAuthenticated: state.login.isAuthenticated,
     deleteStatus: state.postdata.deleteStatus

@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+// this is a simple contact us component which is stateless functional component
 const Footer = () => {
     return (
 

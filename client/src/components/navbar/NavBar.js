@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css'
 
+
+// this is a simple contact us component which is stateless functional component
 const NavBar = () => {
     return (
 
         <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top" >
 
-            <Link className="navbar-brand" to="/" style={{ color: "white" }}><img src="./images/trendinit.png" width="45px" height="40px" alt="logo" /></Link>
-            <Link className="navbar-brand" to="/" style={{ color: "white" }}><h4 className="title" id="trend">TREND</h4><h4 className="title" id="init">INIT</h4></Link>
+
+            <Link className="navbar-brand" to="/" style={{ color: "white", paddingLeft: 10 }}><h4 className="title" id="trend">TREND</h4><h4 className="title" id="init">INIT</h4></Link>
 
 
 
