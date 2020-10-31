@@ -14,8 +14,9 @@
 
 
 .adminhome-article-img{
-    width: 280px;
-    height: 200px;
+    display: flex;
+    justify-content: center;
+    
 }
 .del{
     margin-left: 20px;

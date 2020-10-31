@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const article = require('./articleSchema');
+const article = require('../models/articleSchema');
 
 
+// @desc Getting articles by author  
+// @route GET /by/:name
+// @access Public
 router.get("/:name", (req, res) => {
     article.find({ by: req.params.name }).sort({ _id: -1 }).exec((err, data) => {
-        if (err) res.status(404).json({ error: err });
+        if (err) {
+            throw new Error(err)
+        }
         if (data) {
             res.json(data);
         }
         else {
-            res.status(404).json({ error: "user not found" });
+            throw new Error('No Data Found')
         }
     })
 })

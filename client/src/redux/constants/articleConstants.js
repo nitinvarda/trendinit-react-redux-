@@ -1,0 +1,23 @@
+// fetching articles 
+export const ARTICLES_LOADING = "ARTICLES_LOADING";
+export const ARTICLES_SUCCESS = "ARTICLES_SUCCESS";
+export const ARTICLES_ERROR = "ARTICLES_ERROR";
+
+// fetching article with id
+export const ARTICLE_WITH_ID_LOADING = "ARTICLE_WITH_ID_LOADING";
+export const ARTICLE_WITH_ID_SUCCESS = "ARTICLE_WITH_ID_SUCCESS";
+export const ARTICLE_WITH_ID_ERROR = "ARTICLE_WITH_ID_ERROR";
+
+
+// category type
+
+export const CATEGORY_TYPE_LOADING = "CATEGORY_TYPE_LOADING";
+export const CATEGORY_TYPE_SUCCESS = "CATEGORY_TYPE_SUCCESS";
+export const CATEGORY_TYPE_ERROR = "CATEGORY_TYPE_ERROR";
+
+
+// By author
+
+export const BY_AUTHOR_LOADING = 'BY_AUTHOR_LOADING'
+export const BY_AUTHOR_SUCCESS = 'BY_AUTHOR_SUCCESS'
+export const BY_AUTHOR_ERROR = 'BY_AUTHOR_ERROR'

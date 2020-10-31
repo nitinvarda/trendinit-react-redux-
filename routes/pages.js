@@ -1,36 +1,46 @@
 var express = require('express');
 var router = express.Router();
-var article = require('./articleSchema');
+var Article = require('../models/articleSchema');
 
 
+// @desc Articles Home page  
+// @route GET /home
+// @access Public
 
-
-router.get("/home", function (req, res, next) {
+router.get("/home", async (req, res, next) => {
     // this is home page article data which contains all posts data
-    return article
-        .find({})
-        .limit(10)
-        .sort({ _id: -1 })
-        .exec((err, data) => {
-            if (err) console.error(err);
+    const pageSize = 9
+    const page = Number(req.query.pageNumber) || 1
 
-            res.json(data);
-        });
+    try {
+        const count = await Article.countDocuments()
+        const articles = await Article.find().sort({ _id: -1 }).limit(pageSize).skip(pageSize * (page - 1))
+
+
+        res.json({ articles, page, pages: Math.ceil(count / pageSize) })
+    }
+    catch (error) {
+        throw new Error(error)
+    }
 
 })
 
-router.get("/cat/:type", (req, res) => {
+
+// @desc Geting categorie wise articles
+// @route GET /cat/:type
+// @access Public
+
+router.get("/cat/:type", async (req, res, next) => {
     // this is for specific category data
     // only that category posts data is sent
-    return article
-        .find({ category: req.params.type })
-        .limit(10)
-        .sort({ _id: -1 })
-        .exec((err, data) => {
-            if (err) console.error(err);
+    try {
+        const articles = await Article.find({ category: req.params.type }).limit(10).sort({ _id: -1 })
+        res.json(articles)
+    }
+    catch (err) {
+        throw new Error(err)
 
-            res.json(data);
-        });
+    }
 
 })
 

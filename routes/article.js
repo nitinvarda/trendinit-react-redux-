@@ -1,19 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const article = require('./articleSchema');
+const article = require('../models/articleSchema');
 
 
-// this is findind article by id 
-// when we open a post 
-// the particular post is fetched to through its id and send back as response
+// @desc Geting individual article  
+// @route GET /article/:id
+// @access Public
 router.get("/:id", (req, res) => {
     article.findById(req.params.id, (err, data) => {
-        if (err) return res.status(404).json({ error: "error" });
+        if (err) {
+            throw new Error(err)
+
+        }
         if (data) {
             res.json(data);
         }
         else {
-            res.status(404).json({ error: "file not found" })
+            throw new Error('Article not found')
         }
     })
 })

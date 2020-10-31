@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../routes/auth');
-const User = require('./userSchema');
+const User = require('../models/userSchema');
 
 
-// this is for checking authorization 
-// we have auth middleware which authorizes user
+// @desc Checking Authorization of user  
+// @route GET /checkAuth
+// @access Private
 router.get("/", auth, async (req, res) => {
 
     try {
@@ -16,8 +17,8 @@ router.get("/", auth, async (req, res) => {
 
     }
     catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+
+        throw new Error('Not authorized,token failed')
     }
 })
 

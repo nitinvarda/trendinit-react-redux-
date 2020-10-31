@@ -1,7 +1,14 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR } from './index';
+import {
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    USER_LOADED,
+    AUTH_ERROR,
+    LOGIN_LOADING,
+    LOGOUT_USER
+} from '../constants/loginConstants';
 
 import axios from 'axios';
-import { setAlert } from '../actions/alert';
+
 import setAuthToken from '../../setAuthToken';
 
 
@@ -28,6 +35,7 @@ export const loadUser = () => async dispatch => {
 
 // Login action
 export const login = (username, password) => async dispatch => {
+    dispatch({ type: LOGIN_LOADING })
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -48,18 +56,22 @@ export const login = (username, password) => async dispatch => {
         // as soon as login is successfull then we are dispatching loaduser , it will set authentication of user
         dispatch(loadUser())
     }
-    catch (err) {
+    catch (error) {
 
-        const errors = err.response.data;
-
-        if (errors) {
-            dispatch(setAlert(errors.error, 'danger'));
-        }
         dispatch({
             type: LOGIN_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
 
         })
+        setTimeout(() => {
+            dispatch({ type: LOGIN_FAIL, payload: null })
+        }, 3000)
 
     }
 
+}
+
+export const logout = () => dispatch => {
+    localStorage.removeItem('token')
+    dispatch({ type: LOGOUT_USER, payload: 'success' })
 }

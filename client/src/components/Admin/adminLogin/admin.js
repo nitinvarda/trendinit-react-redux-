@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 
 import { login } from '../../../redux/actions/Login';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Form, Button, Row, Col, Container, Card, Alert } from 'react-bootstrap'
+import Loader from '../../Loader'
+
+// import { TextField, Button, FormGroup } from '@material-ui/core'
 import './admin.css';
 
 
-const Admin = ({ Login, isAuthenticated }) => {
+const Admin = () => {
+    const dispatch = useDispatch()
     const [details, setDetails] = useState({
         username: '',
         password: ''
     })
+
+    const Login = useSelector(state => state.login)
+    const { isAuthenticated, isLoading, errMess } = Login
 
     // handling form elements
     const onChange = (e) => {
@@ -22,43 +30,94 @@ const Admin = ({ Login, isAuthenticated }) => {
     // submit function
     const submitForm = (e) => {
         e.preventDefault();
-        Login(username, password);
+        // console.log(details)
+        dispatch(login(username, password));
 
     }
     const { username, password } = details;
-
-
-    if (isAuthenticated) {
-        // if user is authenticated redirect to admin-home
-        return <Redirect to="/admin-home" />
+    if (isLoading) {
+        return <Loader />
     }
     else {
-        return (
-            <div className="container">
 
 
-                <div className=" loginpage ">
+
+        if (isAuthenticated) {
+            // if user is authenticated redirect to admin-home
+            return <Redirect to="/admin-home" />
+        }
+        else {
+            return (
+                <Container >
+
+
+
+                    <Row noGutters>
+                        <Col md={6} className="my-auto" >
+
+                            <h1 className='my-5 login-heading text-center' >Admin ?</h1>
+
+                        </Col>
+                        <Col md={6} className='my-5'>
+
+                            {errMess ? <Alert variant="danger">{errMess}</Alert> : <div></div>}
+                            <Card>
+                                <Card.Header className="text-center" style={{ fontFamil: 'Sen', fontSize: 25, fontWeight: 700 }}>LOGIN HERE</Card.Header>
+                                <Card.Body>
+                                    <Form autoComplete="off" onSubmit={submitForm} >
+                                        <Form.Group controlId="forUserName" >
+                                            <Form.Label >Username</Form.Label>
+                                            <Form.Control type="text" name="username" placeholder="Enter username" required onChange={onChange} />
+
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Form.Label >password</Form.Label>
+                                            <Form.Control type="password" name="password" placeholder="Enter Password" required onChange={onChange} />
+
+                                        </Form.Group>
+
+                                        <div style={{ width: "50%", margin: 'auto' }}>
+
+                                            <Button style={{ width: "90%" }} variant="danger" type="submit" size="lg" >Login</Button>
+                                        </div>
+
+
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    {/* <div className=" loginpage ">
+                    {errMess ? <Alert variant='danger'>{errMess}</Alert> : <div></div>}
+
                     <h3 style={{ textAlign: "center", marginTop: "10px" }}>Admin Login<hr /></h3>
-                    <form onSubmit={submitForm} className="loginform">
-                        <input type="text" name="username" value={username} className="username" onChange={onChange} placeholder="username" required />
-                        <input type="password" name="password" value={password} className="password" onChange={onChange} placeholder="password" required />
+                   
+                    <Form autoComplete="off" onSubmit={submitForm} className="loginform">
+                        <Form.Group controlId="forUserName" >
+                            <Form.Label >Username</Form.Label>
+                            <Form.Control type="text" name="username" placeholder="Enter username" required onChange={onChange} />
+
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label >password</Form.Label>
+                            <Form.Control type="password" name="password" placeholder="Enter Password" required onChange={onChange} />
+
+                        </Form.Group>
+                        <Button variant="danger" type="submit" >Login</Button>
+                    </Form>
+
+                </div> */}
 
 
-                        <input type="Submit" style={{ backgroundColor: "#FF0000" }} defaultValue="Login" />
-
-
-                    </form>
-
-                </div>
-
-
-            </div>
+                </Container>
 
 
 
 
 
-        );
+            );
+        }
     }
 }
 
@@ -67,18 +126,5 @@ Admin.propTypes = {
     isAuthenticated: PropTypes.bool
 }
 
-// bringing state to props 
-const mapStateToProps = state => ({
 
-    isAuthenticated: state.login.isAuthenticated
-
-})
-
-// bringing dispatch to props
-const mapDispatchToProps = (dispatch) => {
-    return {
-        Login: (username, password) => dispatch(login(username, password))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Admin);
+export default Admin;

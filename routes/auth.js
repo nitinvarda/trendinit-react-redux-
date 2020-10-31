@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
     if (!token) {
         // if not authorizatin is denied
-        return res.status(401).json({ error: 'NO token, authorization denied' })
+        throw new Error('Not authorized,token failed')
 
     }
 
@@ -22,8 +22,8 @@ module.exports = (req, res, next) => {
 
     }
     catch (err) {
-        console.log(err);
-        res.status(401).json({ error: err });
+
+        throw new Error('Not a valid token')
     }
 
 }    

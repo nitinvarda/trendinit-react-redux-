@@ -1,16 +1,23 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR } from '../actions/index';
+import { LOGIN_SUCCESS, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_LOADING, LOGOUT_USER } from '../constants/loginConstants';
 
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
-    loading: true,
-    user: null
+    isLoading: true,
+    user: null,
+    errMess: null,
+    logout: null
 }
 
 // this is login reducer 
 export default function (state = initialState, action) {
     const { type, payload } = action
     switch (type) {
+        case LOGIN_LOADING:
+            return {
+                ...state,
+                isLoading: true
+            }
 
         case LOGIN_SUCCESS:
             // if login is success we are storing the jwt token in localstorage
@@ -20,7 +27,8 @@ export default function (state = initialState, action) {
                 ...state,
                 ...payload,
                 isAuthenticated: true,
-                loading: false,
+                isLoading: false
+
 
             }
         case USER_LOADED:
@@ -28,7 +36,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isAuthenticated: true,
-                loading: false,
+                isLoading: false,
                 user: payload
             }
         case LOGIN_FAIL:
@@ -39,7 +47,17 @@ export default function (state = initialState, action) {
                 ...state,
                 token: null,
                 isAuthenticated: false,
-                loading: false
+                isLoading: false,
+                errMess: payload
+            }
+        case LOGOUT_USER:
+            return {
+                token: null,
+                isAuthenticated: false,
+                user: null,
+                isLoading: false,
+                errMess: null,
+                logout: payload
             }
         default:
             return state;
