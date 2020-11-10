@@ -69,6 +69,12 @@
 
 }
 
+.post_desc{
+    margin:40px 0px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
 
 
 @media only screen and (max-width: 600px){

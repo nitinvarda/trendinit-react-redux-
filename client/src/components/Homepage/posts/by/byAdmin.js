@@ -17,7 +17,7 @@ import { Breadcrumb, Alert } from 'react-bootstrap'
 // this is functional component with react-hooks
 const ByAdmin = (props) => {
     const dispatch = useDispatch()
-    const [item, setItem] = useState([]);
+    const [items, setItems] = useState([]);
 
     // bringing name of the author from home to fetch data of that post from db
     // storing name in name variable
@@ -31,7 +31,7 @@ const ByAdmin = (props) => {
     useEffect(() => {
         if (ByAuthorData) {
             if (author === name) {
-                setItem(ByAuthorData)
+                setItems(ByAuthorData)
             }
             else {
 
@@ -59,23 +59,24 @@ const ByAdmin = (props) => {
                     <h5 style={{ textAlign: "center" }}>Articles by: {name}</h5>
                     <hr />
                     <Breadcrumb>
-                        <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                         <Breadcrumb.Item active>{name}</Breadcrumb.Item>
 
 
                     </Breadcrumb>
-                    {item.map(data => {
+
+                    {items.map(item => {
                         return (
-                            <React.Fragment>
-                                <div className=" article-by">
+                            <React.Fragment key={item._id} >
+                                <div className=" article-by" >
                                     <div className="col-lg-4">
-                                        <img src={"/image/" + data.imagename} className="im" alt="post img" />
+                                        <img src={"/image/" + item.imagename} className="im" alt="post img" />
                                     </div>
 
                                     <div className="byAdmin-article-details col-lg-7">
-                                        <h3  ><Link to={"/post/" + data._id}  >{data.title}</Link></h3>
-                                        <p className="byAdmin-article-desc"><ReactMarkdown source={data.desc} escapeHtml={false} /></p>
-                                        <h6>Category:<Link to={"/category/" + data.category}> {data.category}</Link> Date:{data.date}</h6>
+                                        <h3  ><Link to={"/post/" + item._id}  >{item.title}</Link></h3>
+                                        <ReactMarkdown className="byAdmin-article-desc" source={item.desc} escapeHtml={false} />
+                                        <h6>Category:<Link to={"/category/" + item.category}> {item.category}</Link> Date:{item.date}</h6>
 
                                     </div>
 
@@ -84,6 +85,7 @@ const ByAdmin = (props) => {
                             </React.Fragment>
                         )
                     })}
+
                 </div>
             </div>
 

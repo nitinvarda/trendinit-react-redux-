@@ -8,7 +8,7 @@
     "heroku-postbuild": "cd client && npm install && npm run build",
     "client": "cd client && npm run start",
     "dev": "concurrently \"npm run server \" \"npm run client\" ",
-    "test": "env-cmd -f ./config/test.env jest --watchAll   --runInBand"
+    "test": "env-cmd -f ./config/test.env jest --watchAll  --testPathPattern=tests  --runInBand"
   },
   "jest": {
     "testEnvironment": "node"

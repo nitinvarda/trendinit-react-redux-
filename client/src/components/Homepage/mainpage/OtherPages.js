@@ -23,8 +23,8 @@ const OtherPages = (props) => {
     for (let number = 1; number <= pages; number++) {
 
         pagination.push(
-            <Pagination.Item key={number} active={number === Number(pageNumber)}>
-                {number === 1 ? (<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>{number}</Link>) : (<Link to={'/page/' + number} style={{ textDecoration: 'none', color: 'black' }}>{number}</Link>)}
+            <Pagination.Item key={number} active={number === Number(pageNumber)} href={number === 1 ? '/' : '/page/' + number} >
+                {number}
 
             </Pagination.Item>
         );

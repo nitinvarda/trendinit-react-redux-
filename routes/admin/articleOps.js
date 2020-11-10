@@ -15,7 +15,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 
 // database connection
-mongoose.connect(process.env.MONGO_URI_TEST, {
+mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -43,7 +43,7 @@ mongoose.connection
 
 // defining the storage of the image
 var storage = new GridFsStorage({
-    url: process.env.MONGO_URI_TEST,
+    url: process.env.MONGO_URI,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             // crypto creates 16 random numbers 
@@ -188,7 +188,7 @@ router.delete('/delete/:id', auth, (req, res, next) => {
             }
             if (!image || image.length === 0) {
                 res.status(404)
-                var error = new Error('Image found')
+                var error = new Error('Image not found')
 
                 next(error)
 

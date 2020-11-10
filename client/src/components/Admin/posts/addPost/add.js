@@ -5,7 +5,7 @@ import '../editPost/edit.css';
 import { useDispatch, useSelector } from 'react-redux';
 import marked from 'marked';
 import { postData } from '../../../../redux/actions/PostData';
-
+import { Form, Col, Container, Button } from 'react-bootstrap'
 import { Alert } from 'react-bootstrap'
 
 
@@ -24,6 +24,7 @@ const Add = () => {
     })
 
 
+
     const { title, by, desc, category, myImage } = post;
     const marked_desc = marked(desc);
 
@@ -37,6 +38,7 @@ const Add = () => {
     // this is submit funciton for adding post
     const Submit = (e) => {
         e.preventDefault();
+        console.log(title, by, marked_desc, category, myImage)
         dispatch(postData({
             title, by, marked_desc, category, myImage
         }))
@@ -55,6 +57,10 @@ const Add = () => {
         })
     }
 
+
+
+
+
     if (isAuthenticated) {
         // if post is submitted successfully it gets a response as 'success'
 
@@ -64,60 +70,62 @@ const Add = () => {
         }
         else {
             return (
-                <div className="divstyle">
-                    <h3 style={{ textAlign: "center", paddingTop: "10px" }}>Add Post
-                    <hr /></h3>
-                    {errMess ? <Alert variant='danger' >{errMess}</Alert> : <div></div>}
-                    <form onSubmit={Submit} className="formstyle" >
-                        <label><h4>Title</h4></label>
-                        <input type="text" name="title" className="titletext" value={title} onChange={onChange} required />
+                <Container>
+                    <h3 className='text-center my-2 pb-3'>Add an Article</h3>
+                    {errMess ? <Alert variant='danger'>{errMess}</Alert> : null}
+                    <Form className='formstyle' onSubmit={Submit}>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>Title</Form.Label>
+                                <Form.Control type="text" name='title' onChange={onChange} placeholder="Enter Title" required />
 
-                        <div className="catandby">
-                            <div className="cat">
-                                <div>
-                                    <label><h4>Category: </h4></label>
-                                </div>
-                                <div>
-                                    <select name="category" className="category" onChange={onChange} required>
-                                        <option>Select Category</option>
-                                        <option value="Sports">Sports</option>
-                                        <option value="Entertainment">Entertainment</option>
-                                        <option value="Politics">Politics</option>
-                                        <option value="Technology">Technology</option>
-                                        <option value="International">International</option>
-                                        <option value="Others">Others</option>
-                                    </select>
+                            </Form.Group>
 
-                                </div>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="categoryType">
+                                <Form.Label>Category</Form.Label>
+                                <Form.Control as="select" name='category' onChange={onChange} required >
+                                    <option>Select a Category</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="International">International</option>
+                                    <option value="Others">Others</option>
+                                </Form.Control>
 
-                            </div>
-                            <br />
-                            <div className="by" >
-                                <label><h4>by</h4></label>
-                                <input type="text" name="by" className="byinput" value={by} onChange={onChange} required />
+                            </Form.Group>
 
-                            </div>
-                        </div>
+
+                            <Form.Group as={Col} controlId="articleBy">
+                                <Form.Label>By</Form.Label>
+                                <Form.Control type='text' name='by' onChange={onChange} placeholder='Article By' required />
+
+                            </Form.Group>
+                        </Form.Row>
+
+                        <Form.Row>
+                            <Col lg={6}>
+                                <Form.File name="myImage" onChange={fileHandler} label='Upload an Image' required />
+
+                            </Col>
+
+
+                        </Form.Row>
                         <br />
-                        <label>upload an Image</label>
-                        <input type="file" name="myImage" className="up-img" onChange={fileHandler} required />
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="description">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control as='textarea' name="desc" onChange={onChange} rows={5} required />
 
+                            </Form.Group>
 
-                        <br />
-                        <br />
-                        <div className="desc">
-                            <label><h4>Description</h4></label>
-                            <textarea name="desc" rows="4" cols="50" value={desc} onChange={onChange} required />
+                        </Form.Row>
+                        <Button variant='secondary' type='submit' block>Add Post</Button>
 
-                        </div>
-
-
-                        <input type="submit" className="postbtn" defaultValue="POST" />
-                    </form>
-
-
-
-                </div>
+                    </Form>
+                </Container>
 
             )
         }

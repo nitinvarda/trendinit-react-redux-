@@ -20,11 +20,6 @@ const AdminHome = (props) => {
     const pageNumber = props.match.params.pageNumber || 1
 
     const dispatch = useDispatch()
-
-
-
-
-
     // delete post button function
     const delPost = (e) => {
         dispatch(delData(e.target.id))
@@ -41,6 +36,7 @@ const AdminHome = (props) => {
 
     // using useEffect to bring posts from db as soon this component renders
     useEffect(() => {
+
         dispatch(fetchArticles(pageNumber))
 
 
@@ -76,8 +72,7 @@ const AdminHome = (props) => {
                     </div>
                 </div>
                 <hr />
-                {/* className="adminhome-article-img"
-                className="adminhome-article " */}
+
                 <Row className="row">
                     {articles.map((item, i) => (
                         <React.Fragment key={i}>
@@ -94,13 +89,7 @@ const AdminHome = (props) => {
 
                                 <h4 className="admin-home-desc"><ReactMarkdown source={item.desc} escapeHtml={false} /></h4>
                                 <br />
-                                {/* <h3><Link to={"/admin-post/" + item._id} >{item.title}</Link></h3>
-                                <br />
-                                <h5>Article by:<b><i>{item.by}</i></b> --&nbsp; Category:<b><i> {item.category}</i></b> --&nbsp; Date: {item.date.substring(0, 10)}  </h5>
-                                <br />
 
-                                <h4 className="admin-home-desc"><ReactMarkdown source={item.desc} escapeHtml={false} /></h4>
-                                <br /> */}
                                 <Button variant="secondary" type="button" className="btn btn-secondary"><Link to={{ pathname: "/edit/" + item._id }} style={{ color: "white" }}>Edit</Link></Button>
                                 <Button variant="danger" onClick={delPost} id={item._id} type="button" className="btn btn-danger del">Delete</Button>
                                 <hr />

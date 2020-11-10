@@ -85,7 +85,7 @@ const AdminPost = (props) => {
 
                             <h6>By:<Link to={"/by/" + by}>{by}</Link>--Date:{date}</h6>
                             <br />
-                            <h5><ReactMarkdown source={desc} escapeHtml={false} /></h5>
+                            <ReactMarkdown source={desc} escapeHtml={false} />
 
 
 

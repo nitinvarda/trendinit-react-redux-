@@ -26,6 +26,7 @@ export const AddPost = function (state = initialState, action) {
     switch (type) {
         case POST_DATA_LOADING:
             return {
+                ...state,
                 isLoading: true
             }
         case POST_DATA_SUCCESS:
@@ -63,6 +64,7 @@ export const UpdatePost = function (state = updateState, action) {
     switch (type) {
         case POST_DATA_UPDATE_LOADING:
             return {
+                ...state,
                 isLoading: true
             }
         case POST_DATA_UPDATE_SUCCESS:
@@ -103,6 +105,7 @@ export const DeletePost = function (state = deleteState, action) {
     switch (type) {
         case POST_DATA_DELETE_LOADING:
             return {
+                ...state,
                 isLoading: true
             }
         case POST_DATA_DELETE_SUCCESS:

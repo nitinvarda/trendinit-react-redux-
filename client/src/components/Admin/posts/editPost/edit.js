@@ -34,19 +34,18 @@ const Edit = ({ history, match }) => {
 
 
     const Article = useSelector(state => state.ArticleWithId)
-    const { isLoading: postLoading, errMess: postError, article } = Article
+    const { isLoading: articleLoading, errMess: articleError, article } = Article
 
     const UpdatePost = useSelector(state => state.UpdatePost)
     const { errMess: updateError, updateStatus } = UpdatePost
 
     const { title, by, desc, category, date, myImage } = post;
 
-    const DeletePost = useSelector(state => state.DeletePost)
-    const { isLoading: deleteLoading, errMess: deleteError, deleteStatus } = DeletePost
 
 
 
-    // useEffect is similar to componentDidMount() in class component , it fetces the data as soon as component is rendered
+
+
     useEffect(() => {
         if (article) {
             if (article._id === id) {
@@ -68,11 +67,11 @@ const Edit = ({ history, match }) => {
 
 
 
-    }, [id, article, updateStatus, deleteStatus, dispatch])
+    }, [id, article, updateStatus, dispatch])
 
 
     const marked_desc = marked(desc);
-    // submit after editing the post
+
     const Submit = (e) => {
         e.preventDefault();
         dispatch(updateData({
@@ -80,6 +79,7 @@ const Edit = ({ history, match }) => {
         }))
 
     }
+
     // handling form elements
     const onChange = (e) => {
         setPost({
@@ -104,11 +104,9 @@ const Edit = ({ history, match }) => {
 
             return (
                 <div className="divstyle">
-                    {postLoading ? <Loader /> : <div></div>}
-                    {deleteLoading ? <Loader /> : <div></div>}
-                    {postError ? <Alert variant='danger'>{postError}</Alert> : <div></div>}
-                    {deleteError ? <Alert variant='danger'>{deleteError}</Alert> : <div></div>}
-                    {updateError ? <Alert variant='danger'>{updateError}</Alert> : <div></div>}
+                    {articleLoading ? <Loader /> : <div></div>}
+                    {articleError ? <Alert variant='danger'>{articleError}</Alert> : null}
+                    {updateError ? <Alert variant='danger'>{updateError}</Alert> : null}
                     <h3 style={{ textAlign: "center", paddingTop: "10px" }}>Add Post
                 <hr /></h3>
                     <form onSubmit={Submit} className="formstyle" >

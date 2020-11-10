@@ -63,7 +63,7 @@ const Categories = (props) => {
                     <h5 style={{ textAlign: "center" }}>Category : {type}</h5>
                     <hr />
                     <Breadcrumb>
-                        <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                         <Breadcrumb.Item active>{type}</Breadcrumb.Item>
 
                     </Breadcrumb>

@@ -52,7 +52,7 @@ const Admin = () => {
 
 
 
-                    <Row noGutters>
+                    <Row >
                         <Col md={6} className="my-auto" >
 
                             <h1 className='my-5 login-heading text-center' >Admin ?</h1>
@@ -60,25 +60,25 @@ const Admin = () => {
                         </Col>
                         <Col md={6} className='my-5'>
 
-                            {errMess ? <Alert variant="danger">{errMess}</Alert> : <div></div>}
+                            {errMess ? <Alert data-testid="err" variant="danger">{errMess}</Alert> : <div></div>}
                             <Card>
                                 <Card.Header className="text-center" style={{ fontFamil: 'Sen', fontSize: 25, fontWeight: 700 }}>LOGIN HERE</Card.Header>
                                 <Card.Body>
                                     <Form autoComplete="off" onSubmit={submitForm} >
                                         <Form.Group controlId="forUserName" >
                                             <Form.Label >Username</Form.Label>
-                                            <Form.Control type="text" name="username" placeholder="Enter username" required onChange={onChange} />
+                                            <Form.Control type="text" data-testid="username" name="username" placeholder="Enter username" required onChange={onChange} />
 
                                         </Form.Group>
                                         <Form.Group>
                                             <Form.Label >password</Form.Label>
-                                            <Form.Control type="password" name="password" placeholder="Enter Password" required onChange={onChange} />
+                                            <Form.Control type="password" data-testid="password" name="password" placeholder="Enter Password" required onChange={onChange} />
 
                                         </Form.Group>
 
                                         <div style={{ width: "50%", margin: 'auto' }}>
 
-                                            <Button style={{ width: "90%" }} variant="danger" type="submit" size="lg" >Login</Button>
+                                            <Button data-testid='button' style={{ width: "90%" }} variant="danger" type="submit" size="lg" >Login</Button>
                                         </div>
 
 
@@ -87,29 +87,6 @@ const Admin = () => {
                             </Card>
                         </Col>
                     </Row>
-
-                    {/* <div className=" loginpage ">
-                    {errMess ? <Alert variant='danger'>{errMess}</Alert> : <div></div>}
-
-                    <h3 style={{ textAlign: "center", marginTop: "10px" }}>Admin Login<hr /></h3>
-                   
-                    <Form autoComplete="off" onSubmit={submitForm} className="loginform">
-                        <Form.Group controlId="forUserName" >
-                            <Form.Label >Username</Form.Label>
-                            <Form.Control type="text" name="username" placeholder="Enter username" required onChange={onChange} />
-
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label >password</Form.Label>
-                            <Form.Control type="password" name="password" placeholder="Enter Password" required onChange={onChange} />
-
-                        </Form.Group>
-                        <Button variant="danger" type="submit" >Login</Button>
-                    </Form>
-
-                </div> */}
-
-
                 </Container>
 
 

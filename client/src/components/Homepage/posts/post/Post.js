@@ -43,7 +43,7 @@ const Post = (props) => {
     if (title) {
         var split = title.split(" ")
         var breadName = split[1] + " " + split[2]
-        console.log(split)
+
 
     }
 
@@ -58,8 +58,8 @@ const Post = (props) => {
             <div>
                 <Container>
                     <Breadcrumb>
-                        <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-                        <Breadcrumb.Item ><Link to={'/category/' + category}>{category}</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                        <Breadcrumb.Item href={'/category/' + category}>{category}</Breadcrumb.Item>
                         <Breadcrumb.Item active>{breadName}</Breadcrumb.Item>
 
                     </Breadcrumb>
@@ -77,11 +77,6 @@ const Post = (props) => {
 
 
                 </div>
-
-
-
-
-
                 <Container>
 
                     <Row >
@@ -103,7 +98,7 @@ const Post = (props) => {
 
                         <br />
                         <Col >
-                            <h5><ReactMarkdown source={desc} escapeHtml={false} /></h5>
+                            <ReactMarkdown className='post_desc' source={desc} escapeHtml={false} />
                         </Col>
 
 

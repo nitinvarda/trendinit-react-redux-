@@ -1,6 +1,6 @@
 const request = require('supertest')
 const app = require('../app');
-const User = require('../routes/userSchema');
+const User = require('../models/userSchema');
 const { userOneId,
     userOne,
     setupDatabase } = require('./fixtures/db')

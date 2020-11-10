@@ -26,26 +26,24 @@ const HomeScreen = (props) => {
     useEffect(() => {
         dispatch(fetchArticles(pageNumber))
 
-    }, [dispatch, pageNumber])
+
+    }, [pageNumber, dispatch])
 
 
     // this is for the top three latest posts
-
-
 
     const posts = articles.slice(0, 3);
     // this is for all other posts
     const oldposts = articles.slice(3);
 
-    // const cat = (e) => {
-    //     <Link to={"/category/" + e.target.name} />
-    // }
+
 
     let pagination = []
     for (let number = 1; number <= pages; number++) {
         pagination.push(
-            <Pagination.Item key={number} active={number === pageNumber}>
-                {number === 1 ? (<Link to='/' style={{ textDecoration: 'none', color: 'black' }}>{number}</Link>) : (<Link to={'/page/' + number} style={{ textDecoration: 'none', color: 'black' }}>{number}</Link>)}
+            <Pagination.Item key={number} active={number === pageNumber}
+                href={number === 1 ? '/' : '/page/' + number}>
+                {number}
             </Pagination.Item>,
         );
     }
@@ -59,11 +57,11 @@ const HomeScreen = (props) => {
                 <Row noGutters >
                     {posts.map((item, i) => {
                         return (
-                            <Col sm={4}>
+                            <Col sm={4} key={i}>
                                 <Link to={"/post/" + item._id} style={{ color: 'white', textDecoration: 'none' }} >
                                     <div className="first" style={{ backgroundImage: `url(${"/image/" + item.imagename})` }} key={i}>
                                         <div className="text ">
-                                            <h4> {item.title} </h4>
+                                            <h4 data-testid='article'> {item.title} </h4>
 
                                         </div>
                                         <div className="overlay"></div>
@@ -80,13 +78,13 @@ const HomeScreen = (props) => {
 
                 <div className="container ">
                     <div className="category-mobile">
-                        <h4 className="text-center">Categories</h4>
+                        <h4 className="text-center" data-testid="cat">Categories</h4>
                         <Row>
 
                             <Table responsive bordered>
                                 <thead>
                                     <tr>
-                                        <th><Badge variant="primary">New</Badge><a href="https://covid19indian-state.netlify.app/" target="_blank">Covid<br />
+                                        <th><Badge variant="primary">New</Badge><a href="https://covid19indian-state.netlify.app/" rel="noopener noreferrer" target="_blank">Covid<br />
                                         </a></th>
                                         <th ><Link to="/category/Sports">Sports</Link></th>
                                         <th ><Link to="/category/Politics">Politics</Link></th>
